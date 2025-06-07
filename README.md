@@ -1,95 +1,113 @@
 # RickAndMortyTCA
 
-## Project Overview
+## Introducción
 
-RickAndMortyTCA is a sample iOS application built using **SwiftUI** and **The Composable Architecture (TCA)**. The goal of this project is to demonstrate a scalable, testable, and modular architecture by consuming a public **GraphQL API** (Rick and Morty API) to display a paginated list of characters and their detail views.
+Para esta prueba técnica decidí utilizar la arquitectura **TCA (The Composable Architecture)** porque en los últimos meses he venido profundizando en su implementación. Me llamó la atención debido a su adopción en compañías con grandes equipos de desarrollo trabajando en una misma solución. Esta arquitectura permite una organización clara, control de estado predecible y una excelente escalabilidad.
 
-The architecture is strictly based on TCA principles, offering clear state management, composable features, and enhanced testability.
+Además, uno de los requerimientos de la prueba era el uso de **inyección de dependencias**, un aspecto que TCA maneja con gran solidez. Por ello, esta prueba está acompañada de otra versión del repositorio que implementa una arquitectura limpia más tradicional https://github.com/nelsonPena/RickandMortyApp, también con enfoque en SOLID y separación por capas para facilitar pruebas unitarias y mantenimiento.
 
----
+Presento ambas alternativas para mostrar dos enfoques complementarios: esta versión con TCA como arquitectura moderna, y la alternativa con Clean Architecture. TCA no es solo una arquitectura, sino una librería disponible públicamente: [https://www.pointfree.co/collections](https://www.pointfree.co/collections)
 
-## Architecture: The Composable Architecture (TCA)
 
-### Key Concepts
+## Descripción del Proyecto
 
-- **State**: A single source of truth for each domain (feature).
-- **Action**: Enumerates all user actions and side-effect results.
-- **Reducer**: Pure functions that describe how to evolve the state and effects to produce.
-- **Store**: The runtime engine that drives your app by holding state and processing actions.
+RickAndMortyTCA es una aplicación de ejemplo para iOS construida usando **SwiftUI** y **The Composable Architecture (TCA)**. El objetivo de este proyecto es demostrar una arquitectura escalable, testeable y modular consumiendo una **API GraphQL pública** (Rick and Morty API) para mostrar una lista paginada de personajes y sus vistas de detalle.
 
-TCA promotes **composability**, **predictability**, and **testability** by organizing features in a predictable structure. Each screen or feature becomes a standalone and reusable module.
+La arquitectura está estrictamente basada en los principios de TCA, ofreciendo una clara gestión de estado, características composables y mejor capacidad de prueba.
 
 ---
 
-## CharacterListDomain: Feature Breakdown
+## Arquitectura: The Composable Architecture (TCA)
 
-`CharacterListDomain` is the central feature responsible for fetching, displaying, filtering, and paginating characters from the GraphQL API. It also manages the presentation of a character's detailed view.
+### Conceptos Clave
 
-### State
+* **State (Estado)**: Fuente única de la verdad para cada dominio (feature).
+* **Action (Acción)**: Enumera todas las acciones del usuario y resultados de efectos secundarios.
+* **Reducer**: Funciones puras que describen cómo evoluciona el estado y qué efectos se deben producir.
+* **Store**: Motor en tiempo de ejecución que mantiene el estado y procesa las acciones.
 
-- `characterList`: Holds all character items loaded.
-- `filteredList`: Stores the filtered results for search.
-- `isLoading`, `shouldShowError`: Computed flags derived from `dataLoadingStatus`.
-- `searchText`: Query used for search functionality.
-- `characterDetail`: Presented detail domain when a character is tapped.
-- `pagination`: Includes `currentPage`, `canLoadMorePages`, `isPaginating`.
-
-### Actions
-
-- `fetchCharacters`: Triggers the initial or paginated character load.
-- `fetchCharactersResponse`: Handles the result of the API call.
-- `setDetailView`: Opens or closes the character detail view.
-- `searchTextChanged`: Updates the filter results.
-- `loadNextPage`: Loads more characters when reaching the end of the list.
-
-### Dependencies
-
-- `fetchCharactersPaginated`: Injected API client function for paginated fetches.
-- `uuid`: Generates unique identifiers for each item.
-
-### Highlights
-
-- Composability using `.forEach` and `.ifLet` for scoped reducers.
-- Clear separation of responsibilities and side effects.
-- Pagination support without mixing presentation logic into reducers.
-- Live and mock dependency support for API and UUID.
-- Supports presentation using `@Presents` and `.sheet` handling.
+TCA promueve la **composabilidad**, **predictibilidad** y **testabilidad** al organizar las funcionalidades en una estructura predecible. Cada pantalla o función se convierte en un módulo independiente y reutilizable.
 
 ---
 
-## Advantages of Using TCA
+## CharacterListDomain: Desglose de la Funcionalidad
 
-1. **Testability**
+`CharacterListDomain` es la funcionalidad central responsable de obtener, mostrar, filtrar y paginar personajes desde la API GraphQL. También gestiona la presentación de la vista de detalle de un personaje.
 
-   TCA encourages writing isolated and deterministic unit tests. All state transitions and side effects are explicit and testable.
+### Estado
 
-   Example test scenarios:
-   - Load initial characters.
-   - Handle pagination and append new results.
-   - Filter characters using search text.
-   - Trigger and dismiss detail view on tap.
+* `characterList`: Lista completa de personajes cargados.
+* `filteredList`: Resultados filtrados según el texto de búsqueda.
+* `isLoading`, `shouldShowError`: Indicadores derivados de `dataLoadingStatus`.
+* `searchText`: Texto de búsqueda.
+* `characterDetail`: Detalle del personaje seleccionado.
+* `pagination`: Incluye `currentPage`, `canLoadMorePages`, `isPaginating`.
 
-2. **Modularization**
+### Acciones
 
-   Every feature can be extracted into an independent module, and reused across different apps or targets. This project splits:
-   - `CharacterListDomain`
-   - `CharacterItemDomain`
-   - `CharacterDetailDomain`
+* `fetchCharacters`: Inicia la carga inicial o paginada de personajes.
+* `fetchCharactersResponse`: Maneja el resultado de la llamada a la API.
+* `setDetailView`: Abre o cierra la vista de detalle del personaje.
+* `searchTextChanged`: Actualiza los resultados filtrados.
+* `loadNextPage`: Carga más personajes al llegar al final de la lista.
 
-3. **Predictable state management**
+### Dependencias
 
-   There's a single entry point for modifying state: through `Store.send(Action)`. No hidden state changes.
+* `fetchCharactersPaginated`: Cliente API inyectado para obtener personajes paginados.
+* `uuid`: Generador de identificadores únicos para cada elemento.
 
-4. **Clear lifecycle control**
+### Aspectos Destacados
 
-   Asynchronous operations and UI presentation are managed explicitly using `Effect`, `TaskResult`, and `.presented` actions.
+* Composición mediante `.forEach` y `.ifLet` para reducers limitados en alcance.
+* Clara separación de responsabilidades y efectos secundarios.
+* Soporte de paginación sin mezclar la lógica de presentación en los reducers.
+* Soporte para dependencias en vivo y simuladas (mock) para API y UUID.
+* Manejo de presentaciones usando `@Presents` y `.sheet`.
 
 ---
 
-## Installation Guide
+## Ventajas de Usar TCA
 
-### Requirements
+1. **Testabilidad**
 
-- Xcode 14.0 or later
-- iOS 16.0+
-- Swift Package Manager (SPM)
+   TCA fomenta la escritura de pruebas unitarias aisladas y deterministas. Todas las transiciones de estado y efectos secundarios son explícitos y comprobables.
+
+   Escenarios de prueba de ejemplo:
+
+   * Cargar personajes iniciales.
+   * Manejar paginación y anexar nuevos resultados.
+   * Filtrar personajes usando texto de búsqueda.
+   * Mostrar y cerrar vista de detalle al hacer tap.
+
+2. **Modularización**
+
+   Cada funcionalidad puede ser extraída a un módulo independiente y reutilizada en distintas apps o targets. Este proyecto separa:
+
+   * `CharacterListDomain`
+   * `CharacterItemDomain`
+   * `CharacterDetailDomain`
+
+3. **Manejo de estado predecible**
+
+   Hay un único punto de entrada para modificar el estado: `Store.send(Action)`. No existen cambios de estado ocultos.
+
+4. **Control claro del ciclo de vida**
+
+   Las operaciones asincrónicas y la presentación de UI se manejan explícitamente usando `Effect`, `TaskResult` y acciones `.presented`.
+
+---
+
+## Guía de Instalación
+
+### Requisitos
+
+* Xcode 14.0 o superior
+* iOS 16.0+
+* Swift Package Manager (SPM)
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/your-username/RickAndMortyTCA.git
+cd RickAndMortyTCA
+```
