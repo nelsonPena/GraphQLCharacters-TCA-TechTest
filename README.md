@@ -108,6 +108,6 @@ TCA promueve la **composabilidad**, **predictibilidad** y **testabilidad** al or
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/your-username/RickAndMortyTCA.git
+[git clone https://github.com/your-username/RickAndMortyTCA.git](https://github.com/nelsonPena/GraphQLCharacters-TCA-TechTest.git)
 cd RickAndMortyTCA
 ```
