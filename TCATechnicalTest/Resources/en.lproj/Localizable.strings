@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  TCATechnicalTest
+
+  Created by Nelson Peña Agudelo on 6/06/25.
+  
+*/
+"splash_title" = "Rick and Morty";
+"generic_text_error" = "Something went wrong, please try again";
+"try_later_text_error" = "Error, try again later";
+"detail_title" = "Detail";
+"text_done_button" = "Done";
+"Back" = "Back";
+"loading_records" = "Loading records";
+"delete_records" = "Deleting pending records";
+"retry_text" = "Retry";
+"cancel_button_text" = "Cancel";
+"text_title" = "Characters";
+"text_gender" = "Gender:";
+"text_female_gender" = "Female";
+"text_male_gender" = "Male";
+"text_unknown_gender" = "Unknown";
+"text_origin" = "Origin:";
+"text_localization" = "Location:";
+"text_creation_date" = "Creation Date:";
+"text_species" = "Species:";
+"text_human_species" = "Human";
+"text_alien_species" = "Alien";
+"text_humanoid_species" = "Humanoid";
+"text_poopybutthole_species" = "Poopybutthole";
+"text_genderless_gender" = "Genderless";
+"text_mythological_creature_species" = "Mythological Creature";
+"text_status" = "Status:";
+"text_alive_status" = "Alive";
+"text_dead_status" = "Dead";
+"text_unknown_status" = "Unknown";
+"text_search_characters" = "Search characters";
+"characters_title" = "R&M characters";
+"characters_search_prompt" = "Search characters";
+"characters_loading_message" = "Loading characters...";
+"characters_error_message" = "Oops, something went wrong.";
+"characters_retry_button" = "Retry";

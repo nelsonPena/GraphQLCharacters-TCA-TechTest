@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  TCATechnicalTest
+
+  Created by Nelson Peña Agudelo on 6/06/25.
+  
+*/
+"splash_title" = "Rick y Morty";
+"generic_text_error" = "Algo salió mal, reintenta";
+"try_later_text_error" = "Error, intenta más tarde";
+"detail_title" = "Detalle";
+"text_done_button" = "Aceptar";
+"Back" = "Volver";
+"loading_records" = "Cargando registros";
+"delete_records" = "Eliminando registros pendientes";
+"retry_text" = "Reintentar";
+"cancel_button_text" = "Cancelar";
+"text_title" = "Personajes";
+"text_gender" = "Género:";
+"text_female_gender" = "Femenino";
+"text_male_gender" = "Masculino";
+"text_unknown_gender" = "Desconocido";
+"text_origin" = "Origen:";
+"text_localization" = "Localización:";
+"text_creation_date" = "Fecha de creación:";
+"text_species" = "Especie:";
+"text_human_species" = "Humano";
+"text_alien_species" = "Alien";
+"text_humanoid_species" = "Humanoide";
+"text_poopybutthole_species" = "Poopybutthole";
+"text_mythological_creature_species" = "Criatura mitológica";
+"text_genderless_gender" = "Sin género";
+"text_status" = "Estado:";
+"text_alive_status" = "Vivo";
+"text_dead_status" = "Muerto";
+"text_unknown_status" = "Desconocido";
+"text_search_characters" = "Buscar personajes";
+"characters_title" = "Personajes R&M";
+"characters_search_prompt" = "Buscar personajes";
+"characters_loading_message" = "Cargando personajes...";
+"characters_error_message" = "Ups, algo salió mal.";
+"characters_retry_button" = "Reintentar";
