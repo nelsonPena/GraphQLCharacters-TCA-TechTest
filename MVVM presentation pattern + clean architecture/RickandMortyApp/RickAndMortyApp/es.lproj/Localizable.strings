@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  TheRickAndMorty
+
+  Created by Nelson Peña Agudelo on 28/01/25.
+  
+*/
+"splash_title" = "Rick And Morty";
+"generic_text_error" = "Algo salió mal, reintentar";
+"try_later_text_error" = "Error, reintentar";
+"detail_title" = "Detalle";
+"text_done_button" = "Aceptar";
+"Back" = "Volver";
+"loading_records" = "Cargando registros";
+"delete_records" = "Eliminando registros pendientes";
+"retry_text" = "Reintentar";
+"cancel_button_text" = "Cancelar";
+"text_title" = "Personajes";
+"text_gender" = "Genero:";
+"text_female_gender" = "Femenino";
+"text_male_gender" = "Masculino";
+"text_unknown_gender" = "Desconocido";
+"text_origin" = "Origen:";
+"text_localization" = "Localización:";
+"text_creation_date" = "Fecha de creación:";
+"text_species" = "Especie:";
+"text_human_species" = "Humano";
+"text_alien_species" = "Alien";
+"text_status" = "Estado:";
+"text_alive_status" = "Vivo";
+"text_dead_status" = "Muerto";
+"text_unknown_status" = "Desconocido";
+"text_search_characters" = "Buscar personajes";
