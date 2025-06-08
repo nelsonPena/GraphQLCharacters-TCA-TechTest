@@ -1,12 +1,15 @@
 # RickAndMortyTCA
 
-Este repositorio contiene dos implementaciones distintas de la prueba técnica, organizadas en carpetas separadas:
-	•	Una solución basada en TCA (The Composable Architecture), una arquitectura moderna diseñada para escalar en equipos grandes y facilitar pruebas, modularización y control predecible del estado.
-	•	Una segunda solución utilizando Arquitectura Limpia combinada con el patrón MVVM, siguiendo principios SOLID, separación por capas e inyección de dependencias tradicional.
+## Introducción
+
+Este repositorio contiene **dos implementaciones distintas** de la prueba técnica, organizadas en carpetas separadas:
+
+* Una solución basada en **TCA (The Composable Architecture)**, una arquitectura moderna diseñada para escalar en equipos grandes y facilitar pruebas, modularización y control predecible del estado.
+* Una segunda solución utilizando **Arquitectura Limpia** combinada con el patrón **MVVM**, siguiendo principios SOLID, separación por capas e inyección de dependencias tradicional.
 
 Elegí presentar ambas alternativas para mostrar dos enfoques complementarios. He venido profundizando en TCA durante los últimos meses, ya que su uso se ha popularizado en compañías con grandes equipos y necesidades de mantenimiento a largo plazo. Por otro lado, la versión con arquitectura limpia permite mostrar un enfoque más clásico, también alineado con buenas prácticas y testabilidad.
 
-TCA no es solo una arquitectura conceptual, sino una librería oficial mantenida por el equipo de Point-Free, disponible en: https://www.pointfree.co/collections
+TCA no es solo una arquitectura conceptual, sino una librería oficial mantenida por el equipo de Point-Free, disponible en: [https://www.pointfree.co/collections](https://www.pointfree.co/collections)
 
 
 ## Descripción del Proyecto
