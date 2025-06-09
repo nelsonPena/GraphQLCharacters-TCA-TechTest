@@ -53,6 +53,15 @@ RickAndMortyTCA es una aplicación de ejemplo para iOS construida usando **Swift
 
 La arquitectura está estrictamente basada en los principios de TCA, ofreciendo una clara gestión de estado, características composables y mejor capacidad de prueba.
 
+### Funcionalidades del Proyecto
+Este proyecto implementa las siguientes características principales:
+
+- Visualización de una lista de personajes obtenidos desde una **API GraphQL pública**.
+- Cada personaje presenta información clave: **nombre**, **estado** (vivo, muerto, desconocido), **especie**, e **imagen**.
+- Funcionalidad de **actualización manual** de la lista para obtener los datos más recientes.
+- **Paginación automática**, permitiendo cargar grandes volúmenes de personajes de forma eficiente.
+- Experiencia fluida y modular gracias a una **arquitectura composable** basada en **TCA (The Composable Architecture)**, que favorece la escalabilidad, testabilidad y separación de responsabilidades.
+ 
 ---
 
 ## Guía de Instalación
