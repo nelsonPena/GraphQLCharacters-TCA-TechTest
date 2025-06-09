@@ -9,14 +9,21 @@ import SwiftUI
 
 @main
 struct RickAndMortyApp: App {
-    @StateObject var networkMonitor = NetworkMonitor()
     @StateObject private var coordinator = AppCoordinator()
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.purple]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.purple]
+    }
     
     var body: some Scene {
         WindowGroup {
-            coordinator.build(page: .splash)
-                .environmentObject(coordinator)
-                .environmentObject(networkMonitor)
+            NavigationStack(path: $coordinator.path) {
+                coordinator.build(page: .splash)
+                    .navigationDestination(for: AppPages.self) { page in
+                        coordinator.build(page: page)
+                    }
+            }
         }
     }
 }

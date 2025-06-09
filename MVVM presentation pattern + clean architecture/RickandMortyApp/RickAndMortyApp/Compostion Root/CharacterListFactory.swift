@@ -6,6 +6,16 @@
 //
 
 import Foundation
+import UseCaseProtocol
+import RepositoryProtocol
+import UseCases
+import Entities
+import NetworkCore
+import Networking
+import Repositories
+import DB
+import CoreData
+import Characters
 
 /// `CharacterListFactory` es una factoría que encapsula la lógica para crear las instancias necesarias para la vista de lista de personajes (`CharacterListView`) y su modelo de vista (`CharacterListViewModel`).
 ///
@@ -32,8 +42,8 @@ class CharacterListFactory {
     /// Construye y devuelve una instancia de `CharacterListView` junto con su modelo de vista.
     ///
     /// - Returns: Una instancia de `CharacterListView`.
-    func build() -> CharacterListView {
-        CharacterListView(viewModel: createViewModel())
+    func build(characterListState: CharacterListState) -> CharacterListView {
+        CharacterListView(viewModel: createViewModel(), state: characterListState)
     }
 
     // MARK: - ViewModel Factory
@@ -66,8 +76,8 @@ class CharacterListFactory {
     /// Construye y devuelve una fuente de datos (`ApiCharacterListDataSourceType`) para interactuar con el API.
     ///
     /// - Returns: Una instancia de `ApiCharacterListDataSourceType`.
-    private func createDataSource() -> ApiCharacterListDataSourceType {
-        APICharacterListDataSource(httpClient: httpClient)
+    private func createDataSource() -> CharacterAPIListDataSourceType {
+        CharacterAPIListDataSource(httpClient: httpClient)
     }
 }
 
@@ -80,8 +90,8 @@ extension CharacterListFactory {
     /// Construye y devuelve una instancia de `DataProvider` configurada con un repositorio de datos persistentes.
     ///
     /// - Returns: Una instancia de `DataProvider`.
-    func createDataProviderUseCase() -> DataProvider {
-        DataProvider(model: createDataLayerRepository())
+    func createDataProviderUseCase() -> GetDataProviderType {
+        DataProvider(repository: createDataLayerRepository())
     }
 
     // MARK: - Private Methods
@@ -89,7 +99,7 @@ extension CharacterListFactory {
     /// Construye y devuelve un repositorio de capa de datos (`DataLayerRepository`) para gestionar datos persistentes.
     ///
     /// - Returns: Una instancia de `DataLayerRepository`.
-    private func createDataLayerRepository() -> DataLayerRepository {
+    private func createDataLayerRepository() -> DataProviderRepositoryType {
         DataLayerRepository(provider: createPersistence())
     }
 
@@ -97,6 +107,8 @@ extension CharacterListFactory {
     ///
     /// - Returns: Una instancia de `CoreDataStack`.
     private func createPersistence() -> CoreDataStack {
-        CoreDataStack(context: PersistenceController.shared.container.viewContext)
+        let persistence = PersistenceController(container: NSPersistentContainer(name: "Characters"))
+        return CoreDataStack(context: persistence.getContainer().viewContext)
     }
+    
 }

@@ -15,14 +15,14 @@ final class CharactersRepositoryTests: XCTestCase {
     private var cancellables: Set<AnyCancellable>!
     private var mockHttpClient: MockURLSessionHTTPClient!
     private var repository: CharacterListRepository!
-    private var dataSource: APICharacterListDataSource!
+    private var dataSource: CharacterAPIListDataSource!
 
     // MARK: - Setup & TearDown
     override func setUp() {
         super.setUp()
         cancellables = []
         mockHttpClient = MockURLSessionHTTPClient()
-        dataSource = APICharacterListDataSource(httpClient: mockHttpClient)
+        dataSource = CharacterAPIListDataSource(httpClient: mockHttpClient)
         repository = CharacterListRepository(apiDataSource: dataSource)
     }
 

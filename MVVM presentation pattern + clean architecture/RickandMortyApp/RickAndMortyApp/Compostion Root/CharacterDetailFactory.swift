@@ -7,6 +7,13 @@
 
 import Foundation
 import SwiftUI
+import UseCaseProtocol
+import UseCases
+import RepositoryProtocol
+import NetworkCore
+import Repositories
+import Networking
+import Characters
 
 /// `CharacterDetailFactory` es una factoría que encapsula la lógica para crear instancias de la vista de detalles de los personajes (`CharacterDetailView`) y su modelo de vista (`CharacterDetailViewModel`).
 ///
@@ -20,8 +27,8 @@ class CharacterDetailFactory {
     /// - Parameters:
     ///   - viewData: Los datos de vista que se utilizarán para configurar la vista y su modelo de detalles.
     /// - Returns: Una instancia de `CharacterDetailView`.
-    func build(with viewData: CharacterDetailViewData) -> CharacterDetailView {
-        CharacterDetailView(viewModel: createViewModel(viewData: viewData))
+    func build(with viewData: CharacterDetailViewData, state: CharacterDetailState) -> CharacterDetailView {
+        CharacterDetailView(viewModel: createViewModel(viewData: viewData), state: state)
     }
 
     // MARK: - ViewModel Factory
@@ -62,8 +69,8 @@ class CharacterDetailFactory {
     /// Construye y devuelve una instancia de `ApiCharacterListDataSourceType` (fuente de datos) que obtiene información del API.
     ///
     /// - Returns: Una instancia de `ApiCharacterListDataSourceType`.
-    private func createDataSource() -> ApiCharacterListDataSourceType {
-        APICharacterListDataSource(httpClient: createHTTPClient())
+    private func createDataSource() -> CharacterAPIListDataSourceType {
+        CharacterAPIListDataSource(httpClient: createHTTPClient())
     }
 
     // MARK: - HTTP Client Factory
