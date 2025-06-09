@@ -47,7 +47,7 @@ Cada carpeta representa un **target independiente** que se registra y consume a 
 
 ---
 
-## Descripción del Proyecto
+## Descripción del Proyecto TCA
 
 RickAndMortyTCA es una aplicación de ejemplo para iOS construida usando **SwiftUI** y **The Composable Architecture (TCA)**. El objetivo de este proyecto es demostrar una arquitectura escalable, testeable y modular consumiendo una **API GraphQL pública** (Rick and Morty API) para mostrar una lista paginada de personajes y sus vistas de detalle.
 
