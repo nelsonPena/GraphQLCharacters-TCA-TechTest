@@ -36,7 +36,6 @@ let package = Package(
         .testTarget(
             name: "PresentationTests",
             dependencies: [
-//                "Characters",
                 .product(name: "UseCaseProtocol", package: "Domain"),
             ]
         ),

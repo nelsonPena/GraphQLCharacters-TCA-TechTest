@@ -22,7 +22,7 @@ public class GetCharacters {
     ///
     /// - Parameters:
     ///   - repository: El repositorio que se utilizará para obtener  los personajes .
-    public init(repository: CharactersRepositoryType) {
+    public init(repository: CharactersRepositoryType?) {
         self.repository = repository
     }
 }

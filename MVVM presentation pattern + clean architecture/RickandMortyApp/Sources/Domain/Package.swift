@@ -25,6 +25,10 @@ let package = Package(
             targets: ["UseCases"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/Quick/Quick", from: "6.1.0"),
+        .package(url: "https://github.com/Quick/Nimble", from: "11.2.1")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
@@ -51,9 +55,11 @@ let package = Package(
             name: "DomainTests",
             dependencies: [
                 "UseCases",
-                "RepositoryProtocol"
+                "Entities",
+                "RepositoryProtocol",
+                .product(name: "Quick", package: "Quick"),
+                .product(name: "Nimble", package: "Nimble")
             ]
-            
         ),
     ]
 )
