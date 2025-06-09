@@ -1,141 +1,71 @@
-# RickAndMortyApp
+# RickAndMortyTCA
+
+## Introducción
+
+Este repositorio contiene **dos implementaciones distintas** de la prueba técnica, organizadas en carpetas separadas:
+
+* Una solución basada en **TCA (The Composable Architecture)**, una arquitectura moderna diseñada para escalar en equipos grandes y facilitar pruebas, modularización y control predecible del estado.
+* Una segunda solución utilizando **Arquitectura Limpia** combinada con el patrón **MVVM**, siguiendo principios SOLID, separación por capas e inyección de dependencias tradicional.
+
+Elegí presentar ambas alternativas para mostrar dos enfoques complementarios. He venido profundizando en TCA durante los últimos meses, ya que su uso se ha popularizado en compañías con grandes equipos y necesidades de mantenimiento a largo plazo. Por otro lado, la versión con arquitectura limpia permite mostrar un enfoque más clásico, también alineado con buenas prácticas y testabilidad.
+
+TCA no es solo una arquitectura conceptual, sino una librería oficial mantenida por el equipo de Point-Free, disponible en: [https://www.pointfree.co/collections](https://www.pointfree.co/collections)
+
+---
+
+## Modularización de Aplicaciones iOS con SwiftUI y Swift Package Manager
+
+Este proyecto aplica una estructura modular, dividiendo la aplicación en **módulos funcionales** distribuidos en paquetes independientes utilizando **Swift Package Manager (SPM)**.
+
+Cada módulo encapsula su lógica de negocio, presentación, navegación y dependencias específicas. Esto permite:
+
+* Desacoplamiento entre features
+* Builds más rápidos gracias a la compilación incremental por módulo
+* Mejor testabilidad y reusabilidad
+* Posibilidad de compartir features entre proyectos o equipos
+
+### Estructura de Módulos (ejemplo):
+
+```
+RickAndMortyTCA/
+├── Presentation/              # Capas de UI y coordinadores por feature
+├── Data/                      # Implementaciones de repositorios y clientes
+├── Domain/                   # Entidades, casos de uso, protocolos
+├── RickAndMortyApp/
+│   ├── Resources/             # Recursos de la app principal
+│   ├── Compositon Root/       # Inyección de dependencias
+│   ├── AppCoordinator/        # Coordinador principal de navegación
+│   ├── RickAndMortyApp.swift  # Punto de entrada (estructura App)
+│   ├── Info.plist
+│   └── RickAndMortyApp.entitlements
+├── RickAndMortyAppTests/     # Tests de lógica
+├── RickAndMortyAppUITests/   # Tests de interfaz
+├── Frameworks/               # Frameworks externos si aplica
+```
+
+Cada carpeta representa un **target independiente** que se registra y consume a través de SPM en el `Package.swift`. La navegación entre features se realiza de forma desacoplada mediante coordinadores y estados observables, facilitando un crecimiento escalable de la aplicación.
+
+---
 
 ## Descripción del Proyecto
 
-**RickAndMortyApp** es una aplicación iOS desarrollada en **Swift** que permite explorar personajes de la serie *Rick and Morty*. La aplicación sigue una **arquitectura limpia** basada en **MVVM + Coordinator**, garantizando modularidad, escalabilidad y facilidad de pruebas.
-La aplicación obtiene información desde la API oficial de Rick and Morty y permite navegar entre personajes, ver detalles y manejar errores de manera eficiente.
+RickAndMortyTCA es una aplicación de ejemplo para iOS construida usando **SwiftUI** y **The Composable Architecture (TCA)**. El objetivo de este proyecto es demostrar una arquitectura escalable, testeable y modular consumiendo una **API GraphQL pública** (Rick and Morty API) para mostrar una lista paginada de personajes y sus vistas de detalle.
+
+La arquitectura está estrictamente basada en los principios de TCA, ofreciendo una clara gestión de estado, características composables y mejor capacidad de prueba.
 
 ---
 
-## 1. Implementación de Requisitos Funcionales
+## Guía de Instalación
 
-* Consumo de la API de Rick and Morty para mostrar una lista de personajes.
-* Navegación fluida entre vistas utilizando el patrón **Coordinator**.
-* Búsqueda y filtrado de personajes basado en nombre y estado.
-* Pantalla de detalles que muestra información detallada de cada personaje.
-* Manejo de errores y estados de carga para mejorar la experiencia del usuario.
-* Pruebas unitarias robustas con datos simulados desde archivos JSON locales.
-* Persistencia de datos: se almacena localmente la lista de personajes en caché para mejorar el rendimiento y permitir el acceso sin conexión.
+### Requisitos
 
----
+* Xcode 14.0 o superior
+* iOS 16.0+
+* Swift Package Manager (SPM)
 
-## 2. Calidad del Código (Buenas Prácticas y Principios)
+### 1. Clonar el repositorio
 
-El código sigue los principios **SOLID** y **Clean Architecture**:
-
-* **Single Responsibility Principle (SRP)** → Cada clase tiene una única responsabilidad clara.
-* **Open/Closed Principle (OCP)** → La app es extensible sin modificar el código existente.
-* **Liskov Substitution Principle (LSP)** → Se usan protocolos en lugar de herencia para desacoplar módulos.
-* **Interface Segregation Principle (ISP)** → Interfaces pequeñas y específicas para cada capa.
-* **Dependency Inversion Principle (DIP)** → Se usa inyección de dependencias para reducir acoplamiento.
-
-Otras buenas prácticas utilizadas:
-
-* Uso de **Combine y async/await** para manejar operaciones asincrónicas de manera eficiente.
-* Separación clara entre **Presentación, Dominio y Datos**.
-* Uso de **Coordinator** para gestionar la navegación de manera desacoplada.
-* **Modularización del código** en fábricas y repositorios.
-* **Manejo de caché y persistencia** para mejorar la velocidad de carga de la aplicación.
-
----
-
-## 3. Organización del Proyecto (Estructura y Modularidad)
-
-La aplicación sigue una estructura modular y bien organizada:
-
+```bash
+git clone https://github.com/nelsonPena/GraphQLCharacters-TCA-TechTest.git
+cd RickAndMortyTCA
 ```
-RickAndMortyApp/
-├── App/                     # Configuración de la aplicación y coordinador
-├── Data/                    # Capa de acceso a datos (API y almacenamiento local)
-│   ├── Network/             # Cliente HTTP y manejo de solicitudes
-│   ├── Repository/          # Repositorios de datos
-│   └── Persistence/         # Gestión de almacenamiento en caché
-├── Domain/                  # Casos de uso y modelos de negocio
-├── Presentation/            # Vistas y ViewModels (MVVM)
-│   ├── Views/               # Interfaces de usuario (SwiftUI)
-│   ├── ViewModels/          # Lógica de presentación
-│   └── Coordinator/         # Manejo de navegación
-├── Resources/               # Assets, fuentes y archivos de localización
-└── Tests/                   # Pruebas unitarias
-```
-
-Cada capa es independiente, permitiendo una fácil escalabilidad y mantenimiento.
-
----
-
-## 4. Uso Adecuado de Bibliotecas Externas
-
-La aplicación utiliza las siguientes bibliotecas:
-
-* **SDWebImageSwiftUI** → Para la carga y cacheo eficiente de imágenes remotas.
-* **Combine** → Para manejar programación reactiva y asincronía.
-* **XCTest** → Para pruebas unitarias.
-
-Cada biblioteca es utilizada de manera óptima y justificada, sin dependencias innecesarias.
-
----
-
-## 5. Cobertura y Calidad de los Tests
-
-Pruebas implementadas:
-
-* **Capa de Datos:** Verifica la correcta obtención y decodificación de la API.
-* **Capa de Dominio:** Asegura la correcta ejecución de los casos de uso.
-* **Capa de Presentación:** Prueba la interacción entre ViewModels y Vistas.
-* **Manejo de errores:** Simulación de fallos en la API.
-* **Pruebas de persistencia:** Valida que los personajes se almacenen correctamente en caché.
-
-Se utilizan mocks y archivos JSON locales para asegurar la confiabilidad de los tests.
-
-Ejemplo de una prueba unitaria:
-
-```swift
-func testGetCharactersSuccess() async throws {
-    let characters = try await repository.getCharacters().first()
-    XCTAssertNotNil(characters, "No se obtuvo ningún resultado")
-    XCTAssertGreaterThan(characters?.results.count ?? 0, 0, "No se obtuvieron personajes del JSON")
-}
-```
-
-Cobertura de pruebas: se cubre más del **85% del código crítico**, asegurando estabilidad.
-
----
-
-## 6. Documentación Clara y Detallada
-
-* Cada clase y función está documentada con SwiftDoc, incluyendo:
-
-  * Descripción detallada.
-  * Parámetros y valores de retorno.
-  * Ejemplos de uso.
-
-* README completo: explica la arquitectura, dependencias y estructura del código.
-
-* Comentarios bien estructurados en el código, siguiendo las mejores prácticas de documentación.
-
----
-
-## Cómo Ejecutar el Proyecto
-
-### Requisitos Previos:
-
-* Xcode 14+
-* iOS 16+
-* Conexión a Internet para obtener datos de la API.
-
-### Pasos para Clonar y Ejecutar:
-
-1. Clonar el repositorio:
-
-   ```bash
-   git clone https://github.com/nelsonPena/RickandMortyApp.git
-   cd RickandMortyApp
-   ```
-2. Abrir `RickAndMortyApp.xcodeproj` en Xcode.
-3. Seleccionar un simulador de iOS y ejecutar con `Cmd + R`.
-
----
-
-**Autor:** Nelson Peña Agudelo
-**Repositorio:** [RickAndMortyApp](https://github.com/nelsonPena/RickandMortyApp)
-**Contacto:** [nelson.pena@email.com](mailto:vald3z32@gmail.com)
